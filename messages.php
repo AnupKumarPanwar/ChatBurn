@@ -1,5 +1,6 @@
 ﻿<?php
 session_start();
+
 $dbServer = 'localhost'; //Define database server host
 $dbUsername = 'root'; //Define database username
 $dbPassword = ''; //Define database password
@@ -25,7 +26,7 @@ echo '
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>Bootstrap Chat Box Example</title>
+    <title>Chat Burn</title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME  CSS -->
@@ -50,7 +51,9 @@ echo '
                     <div class="panel-body chat-box-main">';
                     $i=1;
                     $TableName=$_SESSION['email'];
-                    // echo "$TableName";
+                    $user=$_SESSION['name'];
+
+                    echo "Welcome $user";
                     $sql="SELECT * FROM `". $TableName ."` where 1";
 
                     $result=mysqli_query($conn, $sql);

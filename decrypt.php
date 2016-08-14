@@ -23,6 +23,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
 // Check connection
 
 
+function Decrypt($password, $data)
+{
+
+    $data = base64_decode($data);
+    $salt = substr($data, 8, 8);
+    $ct   = substr($data, 16);
+
+    $key = md5($password . $salt, true);
+    $iv  = md5($key . $password . $salt, true);
+
+    $pt = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $ct, MCRYPT_MODE_CBC, $iv);
+
+    return $pt;
+}
+
 
 // http://stackoverflow.com/questions/15485354/angular-http-post-to-php-and-undefined
 
@@ -34,7 +49,10 @@ if (isset($postdata))
 	$request = json_decode($postdata);
 	// echo "$request";
 	$message = $request->message;
-	echo "Anup Panwar";
+	$pass=$request->password;
+
+	$DecryptMsg=Decrypt($pass, $message);
+	echo "$DecryptMsg";
 
 	
 	}

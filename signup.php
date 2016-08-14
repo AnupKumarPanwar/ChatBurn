@@ -42,6 +42,8 @@ session_start();
 $SignupQuery="SELECT * FROM users WHERE email='$email'";
 
 $result=mysqli_query($conn, $SignupQuery);
+ $_SESSION['name']=$r['fname'];
+    $_SESSION['email']=$r['email'];
 
  if(mysqli_num_rows($result)==0)
  {
@@ -51,10 +53,15 @@ $result=mysqli_query($conn, $SignupQuery);
 
     $AddUserTable='CREATE TABLE `'.$NewTableName.'`(`username` varchar(50),`fname` varchar(50), `lname` varchar(50) ,`message` varchar(2000))';
         // echo "Registration Successful.";
-    mysqli_query($conn, $AddUserTable);
-    $_SESSION['name']=$r['fname'];
-    $_SESSION['email']=$r['email'];
-    header("Location: messages.php");
+    $result=mysqli_query($conn, $AddUserTable);
+
+    $_SESSION['name']=$fname;
+    $_SESSION['email']=$email;
+
+    if ($result) {
+        header("Location: messages.php");
+    }
+    
  }
 else
 {
