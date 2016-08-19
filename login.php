@@ -14,15 +14,13 @@ $success=0;
 
 
 
-$dbServer = 'localhost'; //Define database server host
-$dbUsername = 'root'; //Define database username
-$dbPassword = ''; //Define database password
-$dbName = 'crypten'; //Define database name
+// $dbServer = 'localhost'; //Define database server host
+// $dbUsername = 'root'; //Define database username
+// $dbPassword = ''; //Define database password
+// $dbName = 'crypten'; //Define database name
 
-// $dbServer = 'mysql.hostinger.in'; //Define database server host
-// $dbUsername = 'u554972518_admin'; //Define database username
-// $dbPassword = 'bhaijaan'; //Define database password
-// $dbName = 'u554972518_youth'; //Define database name
+
+
 
 $conn=mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName);
 if (!$conn) 
@@ -30,7 +28,9 @@ if (!$conn)
 	header("Location : index.html");
 }
 
-session_start();
+session_start([
+    'cookie_lifetime' => 2592000,
+]);
 $_SESSION['name']=NULL;
 $_SESSION['email']=NULL;
 $LoginQuery="SELECT * FROM users WHERE email='$email'";
@@ -56,7 +56,7 @@ if ($success==1) {
 
 else
 {
-	header("Location: index.html");
+	header("Location: index.php");
 }
 
 ?>	
