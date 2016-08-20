@@ -1,8 +1,7 @@
 <?php
 
-session_start([
-    'cookie_lifetime' => 2592000,
-]);
+session_set_cookie_params(31536000);
+session_start();
 
 $reciever=NULL;
 $message=NULL;
@@ -13,7 +12,7 @@ if (isset($_POST["reciever"]) && isset($_POST["message"])) {
     $message=$_POST['message'];
     $password=$_POST['password'];
 }else{  
-    echo "A field is empty";
+    header("Location: messages.php");
 }
 
 
@@ -21,12 +20,13 @@ $success=0;
 
 
 
-// $dbServer = 'localhost'; //Define database server host
-// $dbUsername = 'root'; //Define database username
-// $dbPassword = ''; //Define database password
-// $dbName = 'crypten'; //Define database name
 
 
+
+$dbServer = 'localhost'; //Define database server host
+$dbUsername = 'root'; //Define database username
+$dbPassword = ''; //Define database password
+$dbName = 'crypten'; //Define database name
 
 $conn=mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName);
 if (!$conn) 
@@ -59,7 +59,7 @@ function Encrypt($password, $data)
 
 $message= Encrypt($password, $message);
 
-$LoginQuery="INSERT INTO `". $reciever ."` (username, fname, message) values ('$sender', '$sendername', '$message') ";
+$LoginQuery="INSERT INTO `". $reciever ."` (username, fname, message, senddate, isunread) values ('$sender', '$sendername', '$message', now(), 1) ";
 
 $result=mysqli_query($conn, $LoginQuery);
 

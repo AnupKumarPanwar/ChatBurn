@@ -1,7 +1,7 @@
 <?php
-session_start([
-    'cookie_lifetime' => 2592000,
-]);
+
+session_set_cookie_params(31536000);
+session_start();
 if ($_SESSION['name']!=NULL) {
   header("Location: messages.php");
 }
@@ -19,12 +19,20 @@ echo '
     
         <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
+
     
     
     
   </head>
 
   <body>
+
+  <div style="height: 100%; width: 100%; position: fixed; left: 0px; top: 0px; z-index: 100; background-color: black; opacity: 0.8; text-align: center; vertical-align: middle; display:none" id="loading" >
+    <div class="mdl-spinner mdl-js-spinner is-active" style="margin-top: 15%;"></div>
+  </div>
 
     <div class="form">
       
@@ -69,7 +77,7 @@ echo '
             <input type="password"required autocomplete="off" name="pass" />
           </div>
           
-          <button type="submit" class="button button-block"/>Get Started</button>
+          <button type="submit" onclick="$(\'#loading\').show()" class="button button-block"/>Get Started</button>
           
           </form>
 
@@ -93,10 +101,9 @@ echo '
             </label>
             <input type="password"required autocomplete="off" name="pass" />
           </div>
+         
           
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-          
-          <button class="button button-block"/>Log In</button>
+          <button onclick="$(\'#loading\').show()" class="button button-block"/>Log In</button>
           
           </form>
 

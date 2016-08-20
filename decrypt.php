@@ -1,6 +1,28 @@
 <?php
 
-// http://stackoverflow.com/questions/18382740/cors-not-working-php
+
+session_set_cookie_params(31536000);
+session_start();
+if ($_SESSION['name']==NULL) {
+    #header("Location: index.php");
+}
+
+
+
+$dbServer = 'localhost'; //Define database server host
+$dbUsername = 'root'; //Define database username
+$dbPassword = ''; //Define database password
+$dbName = 'crypten'; //Define database name
+
+$conn=mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName);
+if (!$conn) 
+{
+    header("Location : index.php");
+}
+
+
+
+
 
 if (isset($_SERVER['HTTP_ORIGIN']))
 	{
@@ -50,13 +72,22 @@ if (isset($postdata))
 	// echo "$request";
 	$message = $request->message;
 	$pass=$request->password;
+        $TableName=$_SESSION['email'];
 
 	$DecryptMsg=Decrypt($pass, $message);
 	echo "$DecryptMsg";
+
+         $sql="UPDATE `". $TableName ."` SET isunread=0 where message = '$message'";
+#echo "$TableName";
+
+         if(!mysqli_query($conn, $sql))
+{
+ #echo "Failed";
+}
 
 	
 	}
   
 
 
-?>	
+?>		

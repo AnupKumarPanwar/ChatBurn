@@ -12,7 +12,7 @@ if (isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) &
     $email=$_POST['email'];
     $pass=$_POST['pass']; 
 }else{  
-    echo "A field is empty";
+    header("Location: index.php");
 }
 
 
@@ -21,14 +21,10 @@ $success=0;
 
 
 
-// $dbServer = 'localhost'; //Define database server host
-// $dbUsername = 'root'; //Define database username
-// $dbPassword = ''; //Define database password
-// $dbName = 'crypten'; //Define database name
-
-
-
-
+$dbServer = 'localhost'; //Define database server host
+$dbUsername = 'root'; //Define database username
+$dbPassword = ''; //Define database password
+$dbName = 'crypten'; //Define database name
 
 $conn=mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName);
 if (!$conn) 
@@ -36,9 +32,8 @@ if (!$conn)
 	echo "Error";
 }
 
-session_start([
-    'cookie_lifetime' => 2592000,
-]);
+session_set_cookie_params(31536000);
+session_start();
 
 $SignupQuery="SELECT * FROM users WHERE email='$email'";
 
@@ -52,7 +47,7 @@ $result=mysqli_query($conn, $SignupQuery);
     mysqli_query($conn, $AddUser);
     $NewTableName=$_POST['email'];
 
-    $AddUserTable='CREATE TABLE `'.$NewTableName.'`(`username` varchar(50),`fname` varchar(50), `lname` varchar(50) ,`message` varchar(2000))';
+    $AddUserTable='CREATE TABLE `'.$NewTableName.'`(`username` varchar(50),`fname` varchar(50) ,`message` varchar(2000), `senddate` datetime, `isunread` int(2))';
         // echo "Registration Successful.";
     $result=mysqli_query($conn, $AddUserTable);
 
