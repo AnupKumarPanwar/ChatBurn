@@ -21,10 +21,24 @@ $success=0;
 
 
 
-$dbServer = 'localhost'; //Define database server host
-$dbUsername = 'root'; //Define database username
-$dbPassword = ''; //Define database password
-$dbName = 'crypten'; //Define database name
+// $dbServer = 'localhost'; //Define database server host
+// $dbUsername = 'root'; //Define database username
+// $dbPassword = ''; //Define database password
+// $dbName = 'crypten'; //Define database name
+
+
+
+$dbServer = 'mysql.hostinger.in'; //Define database server host
+$dbUsername = 'u131693756_admin'; //Define database username
+$dbPassword = 'biappanwar'; //Define database password
+$dbName = 'u131693756_crypt'; //Define database name
+
+
+
+// $dbServer = 'mysql.hostinger.in'; //Define database server host
+// $dbUsername = 'u554972518_admin'; //Define database username
+// $dbPassword = 'bhaijaan'; //Define database password
+// $dbName = 'u554972518_youth'; //Define database name
 
 $conn=mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName);
 if (!$conn) 
@@ -38,18 +52,27 @@ session_start();
 $SignupQuery="SELECT * FROM users WHERE email='$email'";
 
 $result=mysqli_query($conn, $SignupQuery);
- $_SESSION['name']=$r['fname'];
-    $_SESSION['email']=$r['email'];
+
 
  if(mysqli_num_rows($result)==0)
  {
     $AddUser="INSERT INTO users (fname, lname, email, pass) values ('$fname', '$lname', '$email', '$pass')";
-    mysqli_query($conn, $AddUser);
-    $NewTableName=$_POST['email'];
 
-    $AddUserTable='CREATE TABLE `'.$NewTableName.'`(`username` varchar(50),`fname` varchar(50) ,`message` varchar(2000), `senddate` datetime, `isunread` int(2))';
+ $NewTableName=$_POST['email'];
+
+
+    $AddUserTable='CREATE TABLE If Not exists `'.$NewTableName.'`(`username` varchar(50),`fname` varchar(50) ,`message` varchar(2000), `senddate` datetime, `isunread` int(2))';
         // echo "Registration Successful.";
-    $result=mysqli_query($conn, $AddUserTable);
+
+
+
+
+    if( mysqli_query($conn, $AddUser))
+{
+
+
+  $result=mysqli_query($conn, $AddUserTable);
+
 
     $_SESSION['name']=$fname;
     $_SESSION['email']=$email;
@@ -57,6 +80,27 @@ $result=mysqli_query($conn, $SignupQuery);
     if ($result) {
         header("Location: messages.php");
     }
+else
+{
+	// echo "User Already exists please login";
+    header("Location: index.php");
+}
+
+
+
+}
+
+else
+{
+	// echo "User Already exists please login";
+    header("Location: index.php");
+}
+
+
+
+
+   
+  
     
  }
 else
@@ -66,4 +110,4 @@ else
 }
 
 
-?>
+?>	
