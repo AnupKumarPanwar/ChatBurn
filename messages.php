@@ -4,15 +4,16 @@ session_start();
 if ($_SESSION['name']==NULL) {
     header("Location: index.php");
 }
-// $dbServer = 'localhost'; //Define database server host
-// $dbUsername = 'root'; //Define database username
-// $dbPassword = ''; //Define database password
-// $dbName = 'crypten'; //Define database name
 
-$dbServer = 'mysql.hostinger.in'; //Define database server host
-$dbUsername = 'u131693756_admin'; //Define database username
-$dbPassword = 'biappanwar'; //Define database password
-$dbName = 'u131693756_crypt'; //Define database name
+
+
+
+$dbServer = 'localhost'; //Define database server host
+$dbUsername = 'root'; //Define database username
+$dbPassword = ''; //Define database password
+$dbName = 'crypten'; //Define database name
+
+
 
 $conn=mysqli_connect($dbServer,$dbUsername,$dbPassword,$dbName);
 if (!$conn) 
