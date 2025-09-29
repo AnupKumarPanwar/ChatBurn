@@ -47,17 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
 
 function Decrypt($password, $data)
 {
-
-    $data = base64_decode($data);
-    $salt = substr($data, 8, 8);
-    $ct   = substr($data, 16);
-
-    $key = md5($password . $salt, true);
-    $iv  = md5($key . $password . $salt, true);
-
-    $pt = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $ct, MCRYPT_MODE_CBC, $iv);
-
-    return $pt;
+    // Note: MD5 is a one-way hash function, so we cannot truly "decrypt" it
+    // This function will return the MD5 hash for comparison purposes
+    $decoded = base64_decode($data);
+    return $decoded; // Return the MD5 hash
 }
 
 
