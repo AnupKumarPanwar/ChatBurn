@@ -42,15 +42,17 @@ if($sender==NULL)
 
 function Encrypt($password, $data)
 {
-
-    $salt = substr(md5(mt_rand(), true), 8);
-
-    $key = md5($password . $salt, true);
-    $iv  = md5($key . $password . $salt, true);
-
-    $ct = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
-
-    return base64_encode('Salted__' . $salt . $ct);
+    // Use MD5 to create a simple XOR-based encryption
+    $key = md5($password);
+    $keyLength = strlen($key);
+    $dataLength = strlen($data);
+    $encrypted = '';
+    
+    for ($i = 0; $i < $dataLength; $i++) {
+        $encrypted .= chr(ord($data[$i]) ^ ord($key[$i % $keyLength]));
+    }
+    
+    return base64_encode($encrypted);
 }
 
 

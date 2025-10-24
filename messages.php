@@ -144,7 +144,7 @@ setInterval(function(){
 
 
                         echo '<div class="chat-box-left" id="testmsg">';
-                                                echo "U2FsdGVkX19A6XpPrPniboRdcGaqFqZT8/Pw8OaRCuEMTbTFtGd5MkAtJrEr0r4IT+1EKMO5cilR0N2hzBbOyD+siBxLw3vzYOgyu9N0zhkUYc57WyQnWr2OkswYkDmbNF+GaNXo1vPnw6H06MariJPFc1CQmkI/SC+ma66c0wm6Qu46FxaGGY8fnVjXDs5NyKhOy22otuvhBBZf6cY+x4iSRIrI8jDIQwY7t5S6lMJNUO3PfpKJ34NMV/4BlXEhwnvGBi0s2EDS+nwPoqWlVSyOBfbifx+zbEm8ApPjQPxnAWAFvjN/ydY1PmU3/jiUr63QrJ6bv6O6BS9eR/k/bJO3SqLhMrlDOp1+Kzl7JhFPEehIOy2mEt8MIicaaUAT
+                                                echo "LVxVDV4ZQ2BaURBCWktEVEZGU0NMFV5TREtYVVdFVV0GS0ARRV0HFEVRFwoTdSAAS1BXQ11RE1NZW0tLQhFZXAsX
 ";
                                                 echo '</div>
                                                 <div class="chat-box-name-left">';
@@ -173,7 +173,7 @@ setInterval(function(){
                                                                             var passwordtest=$("#testpas").val();
                                                                             // alert(password1);
                                                                                 $.post("decrypt.php",
-                                                                                \'{"message": "U2FsdGVkX19A6XpPrPniboRdcGaqFqZT8/Pw8OaRCuEMTbTFtGd5MkAtJrEr0r4IT+1EKMO5cilR0N2hzBbOyD+siBxLw3vzYOgyu9N0zhkUYc57WyQnWr2OkswYkDmbNF+GaNXo1vPnw6H06MariJPFc1CQmkI/SC+ma66c0wm6Qu46FxaGGY8fnVjXDs5NyKhOy22otuvhBBZf6cY+x4iSRIrI8jDIQwY7t5S6lMJNUO3PfpKJ34NMV/4BlXEhwnvGBi0s2EDS+nwPoqWlVSyOBfbifx+zbEm8ApPjQPxnAWAFvjN/ydY1PmU3/jiUr63QrJ6bv6O6BS9eR/k/bJO3SqLhMrlDOp1+Kzl7JhFPEehIOy2mEt8MIicaaUAT", "password": "\' + passwordtest +\'"}\',
+                                                                                \'{"message": "LVxVDV4ZQ2BaURBCWktEVEZGU0NMFV5TREtYVVdFVV0GS0ARRV0HFEVRFwoTdSAAS1BXQ11RE1NZW0tLQhFZXAsX", "password": "\' + passwordtest +\'"}\',
                                                                                 function(data,status){
                                                                                     $("#testmsg").html(data);
                                                                                     // alert("Data: " + data + "\nStatus: " + status);
