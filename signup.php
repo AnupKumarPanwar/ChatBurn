@@ -42,7 +42,7 @@ $result=mysqli_query($conn, $SignupQuery);
 
  if(mysqli_num_rows($result)==0)
  {
-    $AddUser="INSERT INTO users (fname, lname, email, pass) values ('$fname', '$lname', '$email', '$pass')";
+    $AddUser="INSERT INTO users (fname, lname, email, pass) values ('$fname', '$lname', '$email', '".md5($pass)."')";
 
  $NewTableName=$_POST['email'];
 

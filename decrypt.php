@@ -47,17 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS')
 
 function Decrypt($password, $data)
 {
-
-    $data = base64_decode($data);
-    $salt = substr($data, 8, 8);
-    $ct   = substr($data, 16);
-
-    $key = md5($password . $salt, true);
-    $iv  = md5($key . $password . $salt, true);
-
-    $pt = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $ct, MCRYPT_MODE_CBC, $iv);
-
-    return $pt;
+    // Decrypt using the same MD5-based XOR method
+    $encrypted = base64_decode($data);
+    $key = md5($password);
+    $keyLength = strlen($key);
+    $dataLength = strlen($encrypted);
+    $decrypted = '';
+    
+    for ($i = 0; $i < $dataLength; $i++) {
+        $decrypted .= chr(ord($encrypted[$i]) ^ ord($key[$i % $keyLength]));
+    }
+    
+    return $decrypted;
 }
 
 

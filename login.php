@@ -50,7 +50,7 @@ $result=mysqli_query($conn, $LoginQuery);
 while ($r=mysqli_fetch_assoc($result)) 
 {
 	$data = $r['pass'];
-        if($data==$pass)
+        if($data==md5($pass))
         {
         $success=1;
         $_SESSION['name']=$r['fname'];
